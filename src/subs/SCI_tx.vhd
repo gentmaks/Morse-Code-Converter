@@ -8,7 +8,7 @@ use IEEE.numeric_std.all;
 
 ENTITY SCI_tx is
     generic (
-        Baud_period : integer := 10417
+        Baud_period : integer := 10417 -- Default to 9600 baud rate
             );
     PORT (
         clk : in STD_LOGIC;
@@ -27,6 +27,7 @@ signal tc: STD_LOGIC;
 
 begin
 
+-- Async update of tc
 tc <= '1' when baud_counter = Baud_period - 1 else '0';
 
 --datapath process updates the baud_counter and shifts the values
