@@ -7,6 +7,6 @@ Contributors
 
 CheckList
 - [X] Setup repo
-- [ ] Subcomponents vhd files and testbenches
-- [ ] Top level morse code converter file
+- [X] Subcomponents vhd files and testbenches
+- [X] Top level morse code converter file
 - [ ] Build automation script `bash` or `tcl`
