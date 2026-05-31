@@ -41,11 +41,11 @@ begin
     uut : SCI_rx
         generic map ( Baud_period => BAUD_PERIOD )
         port map (
-            clk          => clk,
-            RsRx         => RsRx,
-            rx_shift     => rx_shift,
-            rx_data      => rx_data,
-            rx_done_tick => rx_done_tick
+        clk          => clk,
+        RsRx         => RsRx,
+        rx_shift     => rx_shift,
+        rx_data      => rx_data,
+        rx_done_tick => rx_done_tick
         );
 
     -- Clock
@@ -64,48 +64,46 @@ begin
         begin
             RsRx <= '0';               -- start bit
             wait for BIT_TIME;
+
             for i in 0 to 7 loop       -- data bits, LSB first
                 RsRx <= b(i);
                 wait for BIT_TIME;
             end loop;
+
             RsRx <= '1';               -- stop bit
             wait for BIT_TIME;
         end procedure;
 
     begin
-        -- Hold idle line for a bit so the receiver settles in IDLE.
+        -- Hold idle line so receiver settles in IDLE.
         RsRx <= '1';
         wait for 5 * BIT_TIME;
 
-        -- Send 'E' (0x45) and wait for the done pulse, then check the byte.
-        -- rx_data latches on the edge leaving DONE, so settle one clock first.
+        -- Send 'E' = 0x45.
         send_byte(x"45");
-        wait until rx_done_tick = '1';
-        wait until rising_edge(clk);
+        wait for 2 * CLK_PERIOD;
         assert rx_data = x"45"
-            report "SCI_rx: expected 0x45 ('E'), got something else"
-            severity error;
+        report "SCI_rx: expected 0x45 ('E'), got something else"
+        severity error;
 
         -- Idle gap between frames.
         wait for 3 * BIT_TIME;
 
-        -- Send 'S' (0x53).
+        -- Send 'S' = 0x53.
         send_byte(x"53");
-        wait until rx_done_tick = '1';
-        wait until rising_edge(clk);
+        wait for 2 * CLK_PERIOD;
         assert rx_data = x"53"
-            report "SCI_rx: expected 0x53 ('S'), got something else"
-            severity error;
+        report "SCI_rx: expected 0x53 ('S'), got something else"
+        severity error;
 
         wait for 3 * BIT_TIME;
 
-        -- Send a space (0x20) to exercise another pattern.
+        -- Send space = 0x20.
         send_byte(x"20");
-        wait until rx_done_tick = '1';
-        wait until rising_edge(clk);
+        wait for 2 * CLK_PERIOD;
         assert rx_data = x"20"
-            report "SCI_rx: expected 0x20 (space), got something else"
-            severity error;
+        report "SCI_rx: expected 0x20 (space), got something else"
+        severity error;
 
         wait for 5 * BIT_TIME;
         report "SCI_rx_tb: stimulus complete" severity note;
