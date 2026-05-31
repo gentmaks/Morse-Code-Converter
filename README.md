@@ -9,4 +9,5 @@ CheckList
 - [X] Setup repo
 - [X] Subcomponents vhd files and testbenches
 - [X] Top level morse code converter file
-- [ ] Build automation script `bash` or `tcl`
+- [X] Build automation script `bash` or `tcl`
+- [ ] Polish README and submit command and demo snippets
