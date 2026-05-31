@@ -22,7 +22,16 @@ end SCI_rx;
 ARCHITECTURE behavioral of SCI_rx is
 
     -- FSM states
-    type state_type is (IDLE, START_WAIT, DATA_WAIT, SAMPLE_BIT, STOP_WAIT, DONE, ERR);
+    type state_type is (
+        IDLE,
+        START_WAIT,
+        DATA_WAIT,
+        SAMPLE_BIT,
+        STOP_WAIT,
+        DONE,
+        ERR
+    );
+
     signal curr_state, next_state : state_type := IDLE;
 
     -- Double flip-flop synchronizer outputs

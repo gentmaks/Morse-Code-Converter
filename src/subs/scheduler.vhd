@@ -39,7 +39,16 @@ architecture behavioral of Scheduler is
     constant SPACE_CHAR : STD_LOGIC_VECTOR(7 downto 0) := x"20";
 
     -- FSM states
-    type state_type is (IDLE, READ_CHAR, CHECK_CHAR, LETTER_GAP, WORD_GAP, START_PLAY, WAIT_PLAY);
+    type state_type is (
+        IDLE,
+        READ_CHAR,
+        CHECK_CHAR,
+        LETTER_GAP,
+        WORD_GAP,
+        START_PLAY,
+        WAIT_PLAY
+    );
+
     signal curr_state, next_state : state_type := IDLE;
 
     -- FSM datapath control outputs
