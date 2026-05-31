@@ -24,7 +24,7 @@ cd Morse-Code-Converter
 
 If on windows:
 
-- Have vivado installed[https://www.xilinx.com/content/xilinx/en/support/download.html/]
+- [Have vivado installed](https://www.xilinx.com/content/xilinx/en/support/download.html/)
 - Open Vivado Tcl Shell
 - Run the following commands
 
