@@ -15,22 +15,22 @@ set_property PACKAGE_PIN W5 [get_ports clk_ext_port]
 ## LED_ports
 ##====================================================================
 ## LED 0 (RIGHT MOST LED)
-set_property PACKAGE_PIN U16 [get_ports {LED_ext_port[0]}]					
-	set_property IOSTANDARD LVCMOS33 [get_ports {LED_ext_port[0]}]
+set_property PACKAGE_PIN U16 [get_ports led_ext_port]					
+	set_property IOSTANDARD LVCMOS33 [get_ports led_ext_port]
 
 ##====================================================================
 ## Buttons
 ##====================================================================
 ## CENTER BUTTON
-set_property PACKAGE_PIN U18 [get_ports btnC_ext_port]						
-	set_property IOSTANDARD LVCMOS33 [get_ports btnC_ext_port]
+set_property PACKAGE_PIN U18 [get_ports reset_ext_port]						
+	set_property IOSTANDARD LVCMOS33 [get_ports reset_ext_port]
 
 ##====================================================================
 ## Pmod Header JA
 ##====================================================================
 ##Sch name = JA1
-set_property PACKAGE_PIN J1 [get_ports {JA_ext_port[0]}]					
-	set_property IOSTANDARD LVCMOS33 [get_ports {JA_ext_port[0]}]
+set_property PACKAGE_PIN J1 [get_ports speaker_ext_port]					
+	set_property IOSTANDARD LVCMOS33 [get_ports speaker_ext_port]
 
 ##====================================================================
 ## USB-RS232 Interface
