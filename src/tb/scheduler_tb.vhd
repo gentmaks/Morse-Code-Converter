@@ -52,14 +52,14 @@ begin
 
     uut : Scheduler
         port map (
-            clk            => clk,
-            t_tick         => t_tick,
-            fifo_empty     => fifo_empty,
-            char_in        => char_in,
-            playback_done  => playback_done,
-            fifo_read      => fifo_read,
-            current_char   => current_char,
-            start_playback => start_playback
+        clk            => clk,
+        t_tick         => t_tick,
+        fifo_empty     => fifo_empty,
+        char_in        => char_in,
+        playback_done  => playback_done,
+        fifo_read      => fifo_read,
+        current_char   => current_char,
+        start_playback => start_playback
         );
 
     -- Clock
@@ -71,22 +71,26 @@ begin
     end process clk_proc;
 
     -- Fast T-unit tick: one-cycle pulse every 4 clocks.
-    tick_proc : process begin
+    tick_proc : process
+    begin
         t_tick <= '0';
+
         wait for 3*CLK_PERIOD;
+
         wait until rising_edge(clk);
         t_tick <= '1';
-        wait for CLK_PERIOD;
-    end process tick_proc;
 
+        wait until rising_edge(clk);
+        t_tick <= '0';
+    end process tick_proc;
     -- Stimulus
     stim_proc : process
 
         -- Present one character at the FIFO head, wait for the scheduler to read
         -- it (fifo_read pulse), then drop fifo_empty as if the FIFO drained.
-        procedure present_char(signal byte : in STD_LOGIC_VECTOR(7 downto 0)) is
+        procedure present_char(constant b : STD_LOGIC_VECTOR(7 downto 0)) is
         begin
-            char_in    <= byte;
+            char_in    <= b;
             fifo_empty <= '0';
             wait until rising_edge(clk) and fifo_read = '1';
             wait until rising_edge(clk);
