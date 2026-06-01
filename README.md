@@ -121,6 +121,5 @@ launch_simulation
 The testbenches override the timing generics with small values so a full character
 plays in microseconds rather than real time.
 
-
 ## Demo
-![Demo](Demo.gif)
+[Demo Video](https://youtube.com/shorts/a1TWZCD_wQo?feature=share)
